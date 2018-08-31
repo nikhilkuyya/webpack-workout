@@ -19,7 +19,16 @@ module.exports = {
             exclude: [/elm-stuff/, /node_modules/],
             use : [
                 {loader:  'elm-webpack-loader'}]
-         }
+         },
+         {
+            test: /\.vue$/,
+            loader: 'vue-loader'
+          }
      ]
+ },
+ "resolve":{
+    alias: {
+        'vue$': path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js')
+      }
  }
 }

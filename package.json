@@ -8,13 +8,17 @@
     "elm-webpack-loader": "^5.0.0",
     "html-loader": "^0.5.5",
     "path": "^0.12.7",
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^15.4.1",
+    "vue-template-compiler": "^2.5.17",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-server": "^0.1.2"
   },
   "scripts": {
-    
-    "webpack": "webpack ./src/js/frameworkHandler.js",
+    "webpack": "webpack ./src/js/app.js",
     "webpack:dev": "yarn run webpack --mode development --watch",
     "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js"
   }

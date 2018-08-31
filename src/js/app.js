@@ -1,5 +1,7 @@
-﻿import * as EVT from './eventemitter2'
-var EVT = new EventEmitter2();
-document.addEventListener('load',() =>{    
-    EVT.emit('init');
-})
+﻿import {frameworkRunner} from './frameworkHandler';
+
+const ele  = document.querySelector("[rel='js-change-framework']")
+ele.onchange = add;
+function add(evt){
+    frameworkRunner(evt.target.value);
+}
