@@ -4,14 +4,18 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "elm-hot": "^0.9.1",
+    "elm-webpack-loader": "^5.0.0",
     "html-loader": "^0.5.5",
+    "path": "^0.12.7",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-server": "^0.1.2"
   },
   "scripts": {
-    "webpack": "webpack ./src/index.html",
-    "webpack:dev": "yarn run webpack --mode development",
-    "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js",
+    
+    "webpack": "webpack ./src/js/frameworkHandler.js",
+    "webpack:dev": "yarn run webpack --mode development --watch",
+    "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js"
   }
 }
