@@ -15,4 +15,6 @@ initialModel =
 
 
 main =
-    text initialModel.framework
+    div []
+        [ text initialModel.framework
+        ]
