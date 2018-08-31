@@ -1,20 +1,24 @@
  
- import Elm from './../Elm/Main.elm'
- import {vm} from './../Vue/index'
+import Elm from './../Elm/Main.elm'
+import {vm} from './../Vue/index'
 import Vue from 'vue';
+import ReactDOM from 'react-dom';
+import {ReactApp }from "./../React/index"
+import React from 'react'
 
-
-const mountNode = document.getElementById('app');    
 
 const frameworkRunnerObj = (function(){
     
     return {
         runElm : function(framework){    
             Elm.Elm.Main.init({
-                node : mountNode
+                node : document.getElementById("app")
             })    
         },
-        runVue : Vue        
+        runVue : Vue,
+        runReact : () => {
+            ReactDOM.render(React.createElement(ReactApp),document.getElementById("app"))
+        }
     }
 
 })()
@@ -28,7 +32,7 @@ function frameworkRunner(val){
             new frameworkRunnerObj.runVue(vm);
             break;
         case 'React':
-            console.log('React');
+            frameworkRunnerObj.runReact();
             break;
         case 'Angular':
             console.log('Angular');

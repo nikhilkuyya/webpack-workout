@@ -1,6 +1,6 @@
 const vm = {
     el : '#app',
-    template:'<div> Vue </div>'    
+    template:'<div id="app"> Vue </div>'    
 }
 
 

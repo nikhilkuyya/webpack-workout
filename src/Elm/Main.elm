@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 
 
 type alias Model =
@@ -15,6 +16,6 @@ initialModel =
 
 
 main =
-    div []
+    div [ id "app" ]
         [ text initialModel.framework
         ]
