@@ -1,6 +1,9 @@
 const vm = {
     el : '#app',
-    template:'<div id="app"> Vue </div>'    
+    template:'<div id="app"> {{framework}} </div>',
+    data:{
+        framework : "Vue"
+    }
 }
 
 
