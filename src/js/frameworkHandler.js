@@ -1,9 +1,9 @@
- 
-import Elm from './../Elm/Main.elm'
-import {vm} from './../Vue/index'
+
+import Elm from './../elm/Main.elm'
+import {vm} from './../vue/index'
 import Vue from 'vue';
 import ReactDOM from 'react-dom';
-import {ReactApp }from "./../React/index"
+import {ReactApp }from "./../react/index"
 import React from 'react'
 
 
