@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "elm-hot": "^0.9.1",
+    "elm": "^0.19.0-bugfix2",
     "elm-webpack-loader": "^5.0.0",
     "html-loader": "^0.5.5",
     "path": "^0.12.7",
@@ -14,11 +14,14 @@
     "vue-hot-reload-api": "^2.3.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7",
+    "webpack-merge": "^4.1.4",
     "webpack-server": "^0.1.2"
   },
   "scripts": {
     "webpack": "webpack ./src/js/app.js",
-    "webpack:dev": "yarn run webpack --mode development --watch",
+    "webpack:dev": "yarn run webpack-dev-server --mode development --watch",
+    "webpack:prod": "yarn run webpack --mode production",
     "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js"
   }
 }

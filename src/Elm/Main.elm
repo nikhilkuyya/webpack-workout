@@ -1,7 +1,7 @@
 module Main exposing (main)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html exposing (div,text)
+import Html.Attributes exposing (id)
 
 
 type alias Model =

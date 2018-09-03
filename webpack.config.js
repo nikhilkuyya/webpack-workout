@@ -1,34 +1,31 @@
-const path = require('path');
-module.exports = {
- "entry": './src/js/frameworkHandler.js',
- "output": {
-    path: path.join(__dirname, "dist"),
-    filename: 'index.js'
- },
- "module":{
-     "noParse": [/.elm$/],
-     "rules":[
-         {
-             "test":/\.(html)$/,
-             "use":{
-                 "loader":"html-loader"
-             }
-         },
-         {
-            test:    /\.elm$/,
-            exclude: [/elm-stuff/, /node_modules/],
-            use : [
-                {loader:  'elm-webpack-loader'}]
-         },
-         {
-            test: /\.vue$/,
-            loader: 'vue-loader'
+const path = require("path");
+const webpackMerge = require("webpack-merge");
+const frameworkConfig = framework =>
+  require(`./build-utils/webpack.${framework}`)(framework);
+
+module.exports = () => {
+  let commonConfig = {
+    entry: "./src/js/app.js",
+    output: {
+      path: path.join(__dirname, "dist"),
+      filename: "index.js"
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(html)$/,
+          use: {
+            loader: "html-loader"
           }
-     ]
- },
- "resolve":{
-    alias: {
-        'vue$': path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js')
-      }
- }
-}
+        }
+      ]
+    }
+  };
+
+  return webpackMerge(
+    commonConfig,
+    frameworkConfig("elm"),
+    frameworkConfig("react"),
+    frameworkConfig("vue")
+  );
+};
