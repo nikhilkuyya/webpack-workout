@@ -4,7 +4,7 @@ import Vue from "vue";
 import ReactDOM from "react-dom";
 import { ReactApp } from "./../react/index";
 import React from "react";
-
+import BackboneApp from "./../backbone/index";
 const frameworkRunnerObj = (function() {
   return {
     runElm: function(framework) {
@@ -12,29 +12,34 @@ const frameworkRunnerObj = (function() {
         node: document.getElementById("app")
       });
     },
-    runVue: Vue,
+    runVue: () => {
+      new Vue(vm);
+    },
     runReact: () => {
       ReactDOM.render(
         React.createElement(ReactApp),
         document.getElementById("app")
       );
+    },
+    runBackbone: () => {
+      new BackboneApp();
     }
   };
 })();
 
 function frameworkRunner(val) {
   switch (val) {
-    case "ELM":
-      frameworkRunnerObj.runElm();
+    case "0":
+      frameworkRunnerObj.runBackbone();
       break;
-    case "Vue":
-      new frameworkRunnerObj.runVue(vm);
-      break;
-    case "React":
+    case "1":
       frameworkRunnerObj.runReact();
       break;
-    case "Angular":
-      console.log("Angular");
+    case "2":
+      frameworkRunnerObj.runVue();
+      break;
+    case "3":
+      frameworkRunnerObj.runElm();
       break;
   }
 }

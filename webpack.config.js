@@ -10,6 +10,7 @@ module.exports = () => {
       path: path.join(__dirname, "dist"),
       filename: "index.js"
     },
+    devtool: "source-map ",
     module: {
       rules: [
         {
