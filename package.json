@@ -16,15 +16,20 @@
     "vue": "^2.5.17",
     "vue-hot-reload-api": "^2.3.0",
     "webpack": "^4.17.1",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7",
     "webpack-merge": "^4.1.4",
+    "webpack-serve": "^2.0.2",
     "webpack-server": "^0.1.2"
   },
   "scripts": {
-    "webpack": "webpack ./src/js/app.js",
-    "webpack:dev": "yarn run webpack-dev-server --mode development",
-    "webpack:prod": "yarn run webpack --mode production",
+    "webpack": "webpack",
+    "prewebpack:dev": "yarn run webpack --env.mode development --hot --watch",
+    "webpack:dev": "yarn webpack-serve .\\webpack.config.js",
+    "webpack:analyzer": "yarn run webpack:prod --env.presets analyzer",
+    "webpack:prod": "yarn run webpack --env.mode production --watch",
+    "webpack:devtool": "yarn run webpack:prod --env.presets devtool",
     "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js"
   }
 }

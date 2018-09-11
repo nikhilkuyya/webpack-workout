@@ -1,8 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-const  ReactApp = () => 
-         React.createElement('div',{},"React");
+const ReactApp = () => React.createElement("div", {}, "React");
 
-export { ReactApp}
-// ReactDOM.render(React.createElement(App),document.getElementById('app'));
+const startReactApp = () => {
+  ReactDOM.render(
+    React.createElement(ReactApp),
+    document.getElementById("app")
+  );
+};
+export default startReactApp;

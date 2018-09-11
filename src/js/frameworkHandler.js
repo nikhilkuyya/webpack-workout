@@ -1,45 +1,44 @@
-import { Elm } from "./../elm/Main.elm";
-import { vm } from "./../vue/index";
-import Vue from "vue";
-import ReactDOM from "react-dom";
-import { ReactApp } from "./../react/index";
-import React from "react";
-import BackboneApp from "./../backbone/index";
-const frameworkRunnerObj = (function() {
-  return {
-    runElm: function(framework) {
-      Elm.Main.init({
-        node: document.getElementById("app")
-      });
-    },
-    runVue: () => {
-      new Vue(vm);
-    },
-    runReact: () => {
-      ReactDOM.render(
-        React.createElement(ReactApp),
-        document.getElementById("app")
-      );
-    },
-    runBackbone: () => {
-      new BackboneApp();
-    }
-  };
-})();
+const setBackBoneApp = () => import("./../backbone");
+const setElmApp = () => import("./../elm");
+const setVueApp = () => import("./../vue");
+const setReactApp = () => import("./../react");
+
+// const frameworkRunnerObj = (function() {
+//   return {
+//     runElm: function() {
+//       Elm.Main.init({
+//         node: document.getElementById("app")
+//       });
+//     },
+//     // runVue: () => {
+//     //   new Vue(vm);
+//     // },
+//     // runReact: () => {
+//     //   ReactDOM.render(
+//     //     React.createElement(ReactApp),
+//     //     document.getElementById("app")
+//     //   );
+//     // },
+//     runBackbone: () => {
+//       new BackboneApp();
+//     }
+//   };
+// })();
 
 function frameworkRunner(val) {
+  debugger;
   switch (val) {
     case "0":
-      frameworkRunnerObj.runBackbone();
+      setBackBoneApp().then(({ default: fn }) => fn());
       break;
     case "1":
-      frameworkRunnerObj.runReact();
+      setReactApp().then(({ default: fn }) => fn());
       break;
     case "2":
-      frameworkRunnerObj.runVue();
+      setVueApp().then(({ default: fn }) => fn());
       break;
     case "3":
-      frameworkRunnerObj.runElm();
+      setElmApp().then(({ default: fn }) => fn());
       break;
   }
 }

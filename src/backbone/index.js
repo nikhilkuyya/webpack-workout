@@ -11,4 +11,8 @@ const BankboneView = Backbone.View.extend({
   }
 });
 
-export default BankboneView;
+const startBackBoneApp = () => {
+  new BankboneView();
+};
+
+export default startBackBoneApp;
