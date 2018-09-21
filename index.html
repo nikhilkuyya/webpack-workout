@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello Framework</title>
+    <title>Hello Frameworks</title>
 </head>
 
 <body>
+
     <div id="app">not rendered</div>
+
     <select rel="js-change-framework">
         <option value="-1">""</option>
+        <option value="4">JS</option>
         <option value="0">Backbone</option>
         <option value="1">React</option>
         <option value="2">Vue</option>
@@ -19,6 +22,14 @@
 
     <script src="./dist/index.js"></script>
 
+    <template id="js-render-1">
+        <style>
+            span {
+                background-color: aqua
+            }
+        </style>
+        <span>Javascript</span>
+    </template>
 
 </body>
 
