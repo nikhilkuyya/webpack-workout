@@ -6,7 +6,6 @@ const BankboneView = Backbone.View.extend({
     this.render();
   },
   render: function() {
-    console.log(this, this.$el);
     this.$el.html("Backbone");
   }
 });
