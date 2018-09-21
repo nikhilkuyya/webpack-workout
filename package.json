@@ -4,15 +4,26 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "backbone": "^1.3.3",
+    "dom-testing-library": "^3.5.2",
     "elm": "^0.19.0-bugfix2",
     "elm-webpack-loader": "^5.0.0",
     "html-loader": "^0.5.5",
+    "jest": "^23.6.0",
     "jquery": "^3.3.1",
+    "main-loop": "^3.4.0",
     "path": "^0.12.7",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "underscore": "^1.9.1",
+    "virtual-dom": "^2.1.1",
     "vue": "^2.5.17",
     "vue-hot-reload-api": "^2.3.0",
     "webpack": "^4.17.1",
@@ -27,9 +38,15 @@
     "webpack": "webpack",
     "prewebpack:dev": "yarn run webpack --env.mode development --hot --watch",
     "webpack:dev": "yarn webpack-serve .\\webpack.config.js",
+    "build:dev": "yarn run webpack:dev",
     "webpack:analyzer": "yarn run webpack:prod --env.presets analyzer",
     "webpack:prod": "yarn run webpack --env.mode production --watch",
     "webpack:devtool": "yarn run webpack:prod --env.presets devtool",
-    "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js"
+    "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "budo": "^11.3.2",
+    "yo-yo": "^1.4.1"
   }
 }
