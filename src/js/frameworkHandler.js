@@ -1,33 +1,10 @@
-const setBackBoneApp = () => import("./../backbone");
-const setElmApp = () => import("./../elm");
-const setVueApp = () => import("./../vue");
-const setReactApp = () => import("./../react");
-const setJS = () => import("./../plainJS");
+const setBackBoneApp = () =>
+  import(/* webpackChunkName:"backbone"*/ "./../backbone");
+const setElmApp = () => import(/* webpackChunkName:"elm"*/ "./../elm");
+const setVueApp = () => import(/* webpackChunkName:"vue"*/ "./../vue");
+const setReactApp = () => import(/* webpackChunkName:"react" */ "./../react");
+const setJS = () => import(/* webpackChunkName: "js" */ "./../plainJS");
 
-// const frameworkRunnerObj = (function() {
-//   return {
-//     runElm: function() {
-//       Elm.Main.init({
-//         node: document.getElementById("app")
-//       });
-//     },
-//     // runVue: () => {
-//     //   new Vue(vm);
-//     // },
-//     // runReact: () => {
-//     //   ReactDOM.render(
-//     //     React.createElement(ReactApp),
-//     //     document.getElementById("app")
-//     //   );
-//     // },
-//     runBackbone: () => {
-//       new BackboneApp();
-//     }
-//   };
-// })();
-// let root = document.getElementById("app");
-
-const root = document.getElementById("app");
 function frameworkRunner(val) {
   switch (val) {
     case "0":

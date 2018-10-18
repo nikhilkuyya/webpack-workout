@@ -19,4 +19,4 @@ function renderJS(node, template) {
     node.appendChild(template);
   }
 }
-export { renderBytemplate, renderByTemplateString };
+export { renderByTemplateString };

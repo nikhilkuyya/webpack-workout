@@ -6,21 +6,26 @@
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.2",
     "backbone": "^1.3.3",
+    "clean-webpack-plugin": "^0.1.19",
     "dom-testing-library": "^3.5.2",
     "elm": "^0.19.0-bugfix2",
     "elm-webpack-loader": "^5.0.0",
     "html-loader": "^0.5.5",
     "jest": "^23.6.0",
     "jquery": "^3.3.1",
+    "json-loader": "^0.5.7",
     "main-loop": "^3.4.0",
     "path": "^0.12.7",
     "react": "^16.4.2",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.4.2",
     "underscore": "^1.9.1",
     "virtual-dom": "^2.1.1",
@@ -35,18 +40,23 @@
     "webpack-server": "^0.1.2"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "webpack": "webpack",
-    "prewebpack:dev": "yarn run webpack --env.mode development --hot --watch",
-    "webpack:dev": "yarn webpack-serve .\\webpack.config.js",
+    "webpack:dev": "yarn run webpack --env.mode development",
     "build:dev": "yarn run webpack:dev",
+    "build:hw": "yarn run build:dev --hot --watch",
     "webpack:analyzer": "yarn run webpack:prod --env.presets analyzer",
-    "webpack:prod": "yarn run webpack --env.mode production --watch",
+    "webpack:prod": "yarn run webpack --env.mode production",
     "webpack:devtool": "yarn run webpack:prod --env.presets devtool",
-    "start-debug": "node-nightly --inspect --inspect-brk ./src/index.js",
-    "test": "jest"
+    "start-debug": "node-nightly --inspect --inspect-brk ./src/js/app.js",
+    "webpack:debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
+    "prewebpack:chart": "yarn run webpack:prod --profile --json --env.presets chart > ./build-assets/stats.json",
+    "webpack:ch": "webpack --env.presets chart",
+    "test": "jest --watch"
   },
   "dependencies": {
     "budo": "^11.3.2",
+    "cake-chart": "^0.2.3",
     "yo-yo": "^1.4.1"
   }
 }

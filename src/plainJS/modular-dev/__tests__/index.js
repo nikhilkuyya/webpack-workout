@@ -1,7 +1,7 @@
-import { run } from "..";
+import { renderByTemplateString } from "..";
 
 test("modular dev test", () => {
   const container = document.createElement("div");
-  container.appendChild(run());
+  container.appendChild(renderByTemplateString());
   expect(container.textContent).toBe("Modular JS");
 });

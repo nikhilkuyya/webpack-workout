@@ -1,10 +1,13 @@
 const path = require("path");
 const webpackMerge = require("webpack-merge");
+const cleanwebpackPlugin = require("clean-webpack-plugin");
 
 const frameworkConfig = framework =>
   require(`./build-utils/webpack.${framework}`)(framework);
 const presetsConfig = env =>
   require(`./build-utils/presets/webpack.${env.presets}`)(env);
+
+const myCustomPlugin = require("./build-utils/plugins/optional.chaining.webpackPlugin");
 
 module.exports = env => {
   let commonConfig = {
@@ -12,9 +15,10 @@ module.exports = env => {
     output: {
       path: path.join(__dirname, "dist/"),
       filename: "index.js",
-      publicPath: path.join(__dirname, "dist/")
+      publicPath: path.join(__dirname, "dist/"),
+      chunkFilename: "[name].lazy.chunk.js"
     },
-    mode: (env && env.mode) || "development",
+    mode: (env && env.mode) || "none",
     module: {
       rules: [
         {
@@ -25,13 +29,7 @@ module.exports = env => {
         }
       ]
     },
-    devServer: {
-      contentBase: path.join(__dirname, "dist/"),
-      port: 4464,
-      hot: true,
-      lazy: true,
-      publicPath: path.join(__dirname, "dist/")
-    }
+    plugins: [new myCustomPlugin(), new cleanwebpackPlugin(["dist"])]
   };
 
   const frameworkMergeConfig = webpackMerge(
@@ -42,7 +40,16 @@ module.exports = env => {
   );
   let finalConfig = frameworkMergeConfig;
   if (env !== undefined && env.presets !== undefined) {
-    finalConfig = webpackMerge({}, frameworkMergeConfig, presetsConfig(env));
+    if (env.presets === "chart") {
+      finalConfig = webpackMerge(
+        {},
+        frameworkConfig("react"),
+        presetsConfig(env)
+      );
+    } else {
+      finalConfig = webpackMerge({}, frameworkMergeConfig, presetsConfig(env));
+    }
   }
+  console.log(finalConfig);
   return finalConfig;
 };
