@@ -47,9 +47,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "webpack": "webpack",
-    "webpack:dev": "yarn run webpack --env.mode development",
-    "build:dev": "yarn run webpack:dev",
-    "build:hw": "yarn run build:dev --hot --watch",
+    "webpack:dev": "yarn run webpack-dev-server --open --env.mode development",
     "webpack:analyzer": "yarn run webpack:prod --env.presets analyzer",
     "webpack:prod": "yarn run webpack --env.mode production",
     "webpack:devtool": "yarn run webpack:prod --env.presets devtool",
@@ -57,7 +55,9 @@
     "webpack:debug": "node-nightly --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
     "prewebpack:chart": "yarn run webpack:prod --profile --json --env.presets chart > ./build-assets/stats.json",
     "webpack:ch": "webpack --env.presets chart",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "build:dev": "yarn run webpack:dev",
+    "build:prod": "yarn run webpack:prod"
   },
   "dependencies": {
     "budo": "^11.3.2",
