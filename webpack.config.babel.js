@@ -1,39 +1,53 @@
-const { resolve, join } = require("path");
+const {
+  join
+} = require("path");
 const webpackMerge = require("webpack-merge");
 const cleanwebpackPlugin = require("clean-webpack-plugin");
-
 const frameworkConfig = framework =>
   require(`./build-utils/webpack.${framework}`)(framework);
 const presetsConfig = env =>
   require(`./build-utils/presets/webpack.${env.presets}`)(env);
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+const {
+  getIfUtils,
+  removeEmpty
+} = require('webpack-config-utils')
 
-// test plugin creation.
-// const myCustomPlugin = require("./build-utils/plugins/optional.chaining.webpackPlugin");
 
 module.exports = env => {
-  console.log(__dirname, "dir");
+  const {
+    ifProduction,
+    ifDevelopment
+  } = getIfUtils(env.mode)
+
   const commonConfig = {
     context: join(__dirname, "src", "js"),
     entry: "./app.js",
     output: {
       path: join(__dirname, "dist"),
       filename: "index.js",
-      publicPath:
-        env.mode === "developement" ? "/dist/" : join(__dirname, "dist/"),
-      chunkFilename: "[name].lazy.chunk.js"
+      publicPath: ifDevelopment("/dist/", join(__dirname, "dist/")),
+      chunkFilename: ifDevelopment("[name].[hash].chunk.js", "[name].[chunkhash].bundle.js")
     },
     mode: (env && env.mode) || "none",
     module: {
-      rules: [
-        {
-          test: /\.(html)$/,
-          use: {
-            loader: "html-loader"
-          }
+      rules: [{
+        test: /\.(html)$/,
+        use: {
+          loader: "html-loader"
         }
-      ]
+      }]
     },
-    plugins: [new cleanwebpackPlugin(["dist"])]
+    plugins: removeEmpty([new cleanwebpackPlugin(["dist"]), new HtmlWebpackPlugin({
+      template: join(__dirname, "src", "index.html")
+    }), ifProduction(new InlineManifestWebpackPlugin())]),
+    optimization: {
+      runtimeChunk: 'single',
+      splitChunks: {
+        chunks: "all"
+      }
+    }
   };
 
   const frameworkMergeConfig = webpackMerge(
