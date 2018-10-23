@@ -1,8 +1,5 @@
 {
   "name": "learn-frameworks",
-  "sideEffects": [
-    "src/**/**.js"
-  ],
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -36,6 +33,7 @@
     "json-loader": "^0.5.7",
     "lint-staged": "^7.3.0",
     "main-loop": "^3.4.0",
+    "mini-css-extract-plugin": "^0.4.4",
     "path": "^0.12.7",
     "prettier": "^1.14.3",
     "react": "^16.4.2",
