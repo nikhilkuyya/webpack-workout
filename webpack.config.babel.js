@@ -1,4 +1,6 @@
-const { join } = require("path")
+const {
+  join
+} = require("path")
 const webpackMerge = require("webpack-merge")
 const cleanwebpackPlugin = require("clean-webpack-plugin")
 const frameworkConfig = framework =>
@@ -7,10 +9,17 @@ const presetsConfig = env =>
   require(`./build-utils/presets/webpack.${env.presets}`)(env)
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin")
-const { getIfUtils, removeEmpty } = require("webpack-config-utils")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {
+  getIfUtils,
+  removeEmpty
+} = require("webpack-config-utils")
 
 module.exports = env => {
-  const { ifProduction, ifDevelopment } = getIfUtils(env.mode)
+  const {
+    ifProduction,
+    ifDevelopment
+  } = getIfUtils(env.mode)
 
   const commonConfig = {
     context: join(__dirname, "src", "js"),
@@ -26,27 +35,31 @@ module.exports = env => {
     },
     mode: (env && env.mode) || "none",
     module: {
-      rules: [
-        {
-          test: /\.(html)$/,
-          use: {
-            loader: "html-loader"
-          }
+      rules: [{
+        test: /\.(html)$/,
+        use: {
+          loader: "html-loader"
         }
-      ]
+      }, {
+        test: /\.(css)$/,
+        use: [
+          ifProduction(MiniCssExtractPlugin.loader, 'style-loader'),
+          'css-loader'
+        ]
+      }]
     },
     plugins: removeEmpty([
       new cleanwebpackPlugin(["dist"]),
       new HtmlWebpackPlugin({
         template: join(__dirname, "src", "index.html")
       }),
+      new MiniCssExtractPlugin({
+        filename: ifDevelopment("styles.[name].css", "styles.[name].[chunkhash].css")
+      }),
       ifProduction(new InlineManifestWebpackPlugin())
     ]),
     optimization: {
       runtimeChunk: "single",
-      splitChunks: {
-        chunks: "all"
-      }
     }
   }
 
