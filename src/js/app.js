@@ -1,6 +1,6 @@
 ﻿const frameworkSelector = () =>
-  import( /* webpackChunkName:"frameworkHandler"*/ "./frameworkHandler")
-import frameworks from "./../test";
+  import(/* webpackChunkName:"frameworkHandler"*/ "./frameworkHandler")
+import frameworks from "./../test"
 
 function init() {
   const selectNode = document.querySelector("[rel='js-change-framework']")
@@ -15,9 +15,7 @@ function init() {
 }
 
 function add(evt) {
-  frameworkSelector().then(({
-    frameworkRunner: fn
-  }) => {
+  frameworkSelector().then(({ frameworkRunner: fn }) => {
     fn(evt.target.value)
   })
 }
