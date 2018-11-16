@@ -1,9 +1,9 @@
-import { Elm } from "./../elm/Main.elm";
+import { Elm } from "./../elm/Main.elm"
 
-const startElmApp = function() {
+const startElmApp = function(node) {
   Elm.Main.init({
-    node: document.getElementById("app")
-  });
-};
+    node
+  })
+}
 
-export default startElmApp;
+export default startElmApp

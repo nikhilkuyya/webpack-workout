@@ -1,17 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
-// import styles from '../main.css';
-
-const ReactApp = () =>
-  React.createElement(
-    "div",
-    {
-      className: "main"
-    },
-    "React"
-  )
 
 const startReactApp = node => {
-  ReactDOM.render(React.createElement(ReactApp), node)
+  const App = require("./App").default
+  ReactDOM.render(React.createElement(App), node)
 }
-export default startReactApp
+
+const unmountReactApp = node => {
+  ReactDOM.unmountComponentAtNode(node)
+}
+
+module.hot.accept(startReactApp)
+
+export { startReactApp, unmountReactApp }

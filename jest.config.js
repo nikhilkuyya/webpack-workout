@@ -1,3 +1,8 @@
 module.exports = {
-  verbose: true
-};
+  verbose: true,
+  moduleFileExtensions: ["js", "vue"],
+  transform: {
+    "^.+\\.js$": "babel-jest",
+    "^.+\\.vue$": "vue-jest"
+  }
+}

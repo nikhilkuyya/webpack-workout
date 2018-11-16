@@ -9,8 +9,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const { getIfUtils, removeEmpty } = require("webpack-config-utils")
+const webpack = require("webpack")
 
-module.exports = env => {
+module.exports = (env = { mode: "none" }) => {
   const { ifProduction, ifDevelopment } = getIfUtils(env.mode)
 
   const commonConfig = {
@@ -54,7 +55,8 @@ module.exports = env => {
           "styles.[name].[chunkhash].css"
         )
       }),
-      ifProduction(new InlineManifestWebpackPlugin())
+      ifProduction(new InlineManifestWebpackPlugin()),
+      new webpack.HotModuleReplacementPlugin()
     ]),
     optimization: {
       runtimeChunk: "single"

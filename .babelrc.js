@@ -1,26 +1,19 @@
 const isTest = String(process.env.NODE_ENV) === "test"
 module.exports = {
   presets: [
-    [
-      "@babel/preset-react",
-      {
-        modules: isTest
-      }
-    ],
+    "@babel/preset-react",
     [
       "@babel/preset-env",
       {
-        modules: isTest
+        modules: isTest ? "commonjs" : false
       }
     ]
   ],
   plugins: [
-    [
-      "@babel/plugin-transform-modules-commonjs",
-      {
-        modules: isTest
-      }
-    ],
+    isTest ? "@babel/plugin-transform-modules-commonjs" : false,
+    "@babel/plugin-proposal-class-properties",
+    "react-hot-loader/babel",
+    "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-optional-chaining"
   ].filter(Boolean)
 }

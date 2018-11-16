@@ -1,17 +1,13 @@
-import Vue from "vue";
-const vm = {
-  el: "#app",
-  template: "<div :id='rootId'>{{framework}} </div>",
-  data: function() {
-    return {
-      rootId: "app",
-      framework: "Vue"
-    };
-  }
-};
+import Vue from "vue"
+import App from "./App.vue"
 
-const startVueApp = () => {
-  return new Vue(vm);
-};
+Vue.config.productionTip = false
 
-export default startVueApp;
+/* eslint-disable no-new */
+export default function setVueApp() {
+  new Vue({
+    el: "#app",
+    template: "<App/>",
+    components: { App }
+  })
+}
