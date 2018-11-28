@@ -26,6 +26,9 @@ module.exports = (env = { mode: "none" }) => {
         "[name].[chunkhash].bundle.js"
       )
     },
+    devServer: {
+      contentBase: "/dist"
+    },
     mode: (env && env.mode) || "none",
     module: {
       rules: [

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "webpack": "webpack",
-    "webpack:dev": "yarn run webpack-dev-server --hotOnly --open --env.mode development",
+    "webpack:dev": "yarn run webpack-dev-server --hot-only --open --env.mode development",
     "webpack:analyzer": "yarn run webpack:prod --env.presets analyzer",
     "webpack:prod": "yarn run webpack --env.mode production",
     "webpack:devtool": "yarn run webpack:prod --env.presets devtool",
